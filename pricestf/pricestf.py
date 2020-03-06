@@ -1,8 +1,15 @@
-from request import request
 from json import load
+from os import path
+import requests
 
-with open('itemids.json') as json_file:
+itemidsfile = path.join(path.dirname(path.abspath(__file__)), 'itemids.json')
+with open(itemidsfile) as json_file:
     itemids = load(json_file)
+
+def request(id, quality=6, au="", ks=""):
+    url = "https://api.prices.tf/items/" + str(id) + ";" + str(quality) + au + ks + "?src=bptf"
+    r = requests.get(url)
+    return(r.json())
 
 def get_price(name, quality="", australium=False, killstreak=0):
     price = {}

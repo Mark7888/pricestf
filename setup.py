@@ -1,7 +1,6 @@
 import setuptools
 
-
-with open('README.md') as f:
+with open('./README.md') as f:
     README = f.read()
 
 setuptools.setup(
@@ -10,11 +9,13 @@ setuptools.setup(
     name='pricestf',
     license="MIT",
     description='python api to Nicklason\'s prices.tf site.',
-    version='v0.0.1',
+    version='v0.0.19',
+    long_description_content_type='text/markdown',
     long_description=README,
     url='https://github.com/Mark7888/pricestf',
     packages=setuptools.find_packages(),
     python_requires=">=3",
+    include_package_data=True,
     install_requires=['requests'],
     classifiers=[
         # Trove classifiers
