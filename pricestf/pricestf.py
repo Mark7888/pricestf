@@ -63,8 +63,11 @@ def get_price(name, quality="", australium=False, killstreak=0):
     myrequest = request(id, quality=qua, au=au, ks=ks)
 
     if myrequest['success'] == False:
-        print("Something went wrong: '" + myrequest["message"] + "'")
-        return(None)
+        if myrequest["message"] == "Rate limit exceeded, try again later":
+            return(0)
+        else:
+            print("Something went wrong: '" + myrequest["message"] + "'")
+            return(None)
     else:
         price['name'] = myrequest['name']
         price['buy_price'] = myrequest['buy']

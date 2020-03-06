@@ -18,7 +18,8 @@ from pricestf import get_price
 print(get_price("Scattergun", quality="Strange", australium=False, killstreak=0))
 ```
 It will return a dictionary with the item's full name and with the buy- and sellprices.
-If something went wring, it returns `Null`.
+If rate limit is exceeded, it returns `0`.
+If something else went wring, it returns `Null`.
 
 List of tf2 items:
 https://wiki.alliedmods.net/Team_fortress_2_item_definition_indexes
