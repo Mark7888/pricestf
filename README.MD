@@ -39,9 +39,10 @@ Qualities:
 - Haunted
 - Collector's
 - Decorated Weapon
--
+
 Australium:
 - It can be `True` if australium, and `False` if not.
+
 Killstreak:
 - If ``not killstreak`` it's `0`
 - If ``killstreak`` it's `1`
