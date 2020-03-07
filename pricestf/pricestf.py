@@ -11,7 +11,7 @@ def request(id, quality=6, au="", ks=""):
     r = requests.get(url)
     return(r.json())
 
-def get_price(name, quality="", australium=False, killstreak=0):
+def get_price(name, quality="", australium=False, killstreak=0, error_message=True):
     price = {}
     au = ""
     ks = ""
@@ -57,17 +57,24 @@ def get_price(name, quality="", australium=False, killstreak=0):
     try:
         id = itemids[name]
     except:
-        print("NameError: No item named " + name)
-        return(None)
+        if error_message:
+            print("NameError: No item named " + name)
+        return(4)
 
     myrequest = request(id, quality=qua, au=au, ks=ks)
 
     if myrequest['success'] == False:
-        if myrequest["message"] == "Rate limit exceeded, try again later":
-            return(0)
-        else:
+        if error_message:
             print("Something went wrong: '" + myrequest["message"] + "'")
-            return(None)
+
+        if myrequest["message"] == "Rate limit exceeded, try again later":
+            return(1)
+        elif  myrequest["message"] == "Item is not priced":
+            return(2)
+        elif myrequest["message"] == "No prices for given source":
+            return(3)
+        else:
+            return(0)
     else:
         price['name'] = myrequest['name']
         price['buy_price'] = myrequest['buy']
