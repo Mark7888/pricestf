@@ -19,7 +19,7 @@ print(get_price("Scattergun", quality="Strange", australium=False, killstreak=0,
 ```
 It will return a dictionary with the item's full name and with the buy- and sellprices.
 ```json
-{'name': 'Strange Scattergun', 'buy_price': {'keys': 0, 'metal': 18.11}, 'sell_price': {'keys': 0, 'metal': 18.22}}
+{"name": "Strange Scattergun", "buy_price": {"keys": 0, "metal": 18.11}, "sell_price": {"keys": 0, "metal": 18.22}}
 ```
 If something went wring, it returns an error code.
 
@@ -66,7 +66,7 @@ If something went wring, it returns an error code.
 
 If `True`, besides the prices it will even return data about the current ratelimit status. (Default: `False`)
 ```json
-{'name': 'Strange Scattergun', 'buy_price': {'keys': 0, 'metal': 18.11}, 'sell_price': {'keys': 0, 'metal': 18.22}, 'ratelimit': {'limit': 180, 'remaining': 178, 'reset': 1583686816}}
+{"name": "Strange Scattergun", "buy_price": {"keys": 0, "metal": 18.11}, "sell_price": {"keys": 0, "metal": 18.22}, "ratelimit": {"limit": 180, "remaining": 178, "reset": 1583686816}}
 ```
 Also usable:
 
@@ -78,7 +78,7 @@ print(ratelimit())
 
 You will get a dictionary about the current ratelimit status.
 ```json
-{'limit': 180, 'remaining': 180, 'reset': 1583686816}
+{"limit": 180, "remaining": 180, "reset": 1583686816}
 ```
 
 License
