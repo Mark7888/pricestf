@@ -78,7 +78,7 @@ print(ratelimit())
 
 You will get a dictionary about the current ratelimit status.
 ```json
-{"limit": 180, "remaining": 180, "reset": 1583686816}
+{"limit": 180, "remaining": 178, "reset": 1583686816}
 ```
 
 License
