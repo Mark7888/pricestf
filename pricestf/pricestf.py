@@ -29,6 +29,16 @@ def request(id, quality=6, au="", ks=""):
     r = requests.get(url)
     return(r.json(), r.headers)
 
+def ratelimit():
+    data = {}
+    urlrequest = request(0)
+    headers = urlrequest[1]
+    data["limit"] = int(headers["X-RateLimit-Limit"])
+    data["remaining"] = int(headers["X-RateLimit-Remaining"])
+    data["reset"] = int(headers["X-RateLimit-Reset"])
+
+    return(data)
+
 def get_price(name, quality="", australium=False, killstreak=0, error_message=True, ratelimit_data=False):
     data = {}
     au = ""
@@ -77,15 +87,5 @@ def get_price(name, quality="", australium=False, killstreak=0, error_message=Tr
             data["ratelimit"]["limit"] = int(headers["X-RateLimit-Limit"])
             data["ratelimit"]["remaining"] = int(headers["X-RateLimit-Remaining"])
             data["ratelimit"]["reset"] = int(headers["X-RateLimit-Reset"])
-
-    return(data)
-
-def ratelimit():
-    data = {}
-    urlrequest = request(0)
-    headers = urlrequest[1]
-    data["limit"] = int(headers["X-RateLimit-Limit"])
-    data["remaining"] = int(headers["X-RateLimit-Remaining"])
-    data["reset"] = int(headers["X-RateLimit-Reset"])
 
     return(data)
