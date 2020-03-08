@@ -3,3 +3,4 @@ build/
 dist/
 __pycache__/
 upload.bat
+pricestf/__pycache__/
