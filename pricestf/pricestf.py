@@ -58,7 +58,7 @@ def get_price(name, quality="", australium=False, killstreak=0, error_message=Tr
         id = itemids[name]
     except:
         if error_message:
-            raise("NameError: No item named " + name)
+            print("NameError: No item named " + name)
         return(4)
 
     urlrequest = request(id, quality=qua, au=au, ks=ks)
@@ -68,7 +68,7 @@ def get_price(name, quality="", australium=False, killstreak=0, error_message=Tr
 
     if request_content['success'] == False:
         if error_message:
-            raise("Something went wrong: '" + request_content["message"] + "'")
+            print("Something went wrong: '" + request_content["message"] + "'")
 
         if request_content["message"] == "Rate limit exceeded, try again later":
             return(1)
