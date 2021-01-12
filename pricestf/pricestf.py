@@ -24,8 +24,8 @@ qualities = {
 "Decorated Weapon" : 15
 }
 
-def request(id, quality=6, au="", ks=""):
-    url = "https://api.prices.tf/items/" + str(id) + ";" + str(quality) + au + ks + "?src=bptf"
+def request(id, quality=6, au="", ks="", option=""):
+    url = "https://api.prices.tf/items/" + str(id) + ";" + str(quality) + au + ks + option + "?src=bptf"
     r = requests.get(url)
     return(r.json(), r.headers)
 
@@ -39,7 +39,7 @@ def ratelimit():
 
     return(data)
 
-def get_price(name, quality="", australium=False, killstreak=0, error_message=True, ratelimit_data=False):
+def get_item_data(name, quality, australium, killstreak, error_message, ratelimit_data, history):
     data = {}
     au = ""
     ks = ""
@@ -58,10 +58,13 @@ def get_price(name, quality="", australium=False, killstreak=0, error_message=Tr
         id = itemids[name]
     except:
         if error_message:
-            print("NameError: No item named " + name)
+            print("NameError: No item named: " + name)
         return(4)
 
-    urlrequest = request(id, quality=qua, au=au, ks=ks)
+    if history:
+        urlrequest = request(id, quality=qua, au=au, ks=ks, option="/history")
+    else:
+        urlrequest = request(id, quality=qua, au=au, ks=ks)
 
     request_content = urlrequest[0]
     headers = urlrequest[1]
@@ -78,7 +81,7 @@ def get_price(name, quality="", australium=False, killstreak=0, error_message=Tr
             return(3)
         else:
             return(0)
-    else:
+    elif history == False:
         data['name'] = request_content['name']
         data['buy_price'] = request_content['buy']
         data['sell_price'] = request_content['sell']
@@ -87,5 +90,15 @@ def get_price(name, quality="", australium=False, killstreak=0, error_message=Tr
             data["ratelimit"]["limit"] = int(headers["X-RateLimit-Limit"])
             data["ratelimit"]["remaining"] = int(headers["X-RateLimit-Remaining"])
             data["ratelimit"]["reset"] = int(headers["X-RateLimit-Reset"])
+    else:
+        data['name'] = request_content['name']
+        data['history'] = request_content['history']
 
     return(data)
+
+def get_price(name, quality="", australium=False, killstreak=0, error_message=True, ratelimit_data=False):
+
+    return get_item_data(name, quality, australium, killstreak, error_message, ratelimit_data, False)
+
+def get_history(name, quality="", australium=False, killstreak=0, error_message=True, ratelimit_data=False):
+    return get_item_data(name, quality, australium, killstreak, error_message, ratelimit_data, True)
