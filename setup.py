@@ -9,7 +9,7 @@ setuptools.setup(
     name='pricestf',
     license="MIT",
     description='python api to Nicklason\'s prices.tf site.',
-    version='v1.1.0',
+    version='v1.1.1',
     long_description_content_type='text/markdown',
     long_description=README,
     url='https://github.com/Mark7888/pricestf',
