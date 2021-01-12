@@ -23,6 +23,16 @@ It will return a dictionary with the item's full name and with the buy- and sell
 ```
 If something went wring, it returns an error code.
 
+### Getting item history
+```py
+from pricestf import get_history
+
+print(get_history("Scattergun", quality="Strange", australium=False, killstreak=0, error_message=True, ratelimit_data=False))
+```
+It will return a dictionary with the item's full name and the list of different prices on different dates.
+```json
+{"name": "Strange Scattergun", "history": [{"time": 1602993074, "buy": {"keys": 0, "metal": 23.77}, "sell": {"keys": 0, "metal": 24.44}}, {"time": 1602998528, "buy": {"keys": 0, "metal": 23.77}, "sell": {"keys": 0, "metal": 30}}]}
+```
 
 ##### Error codes:
 - `0`: Unknown error
